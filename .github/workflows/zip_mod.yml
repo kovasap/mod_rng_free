@@ -25,12 +25,27 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: zipmod
         run: zip mod_rng_free.zip scripts/**
 
-      - name: Upload packaged mod
-        uses: actions/upload-artifact@v4
+      - name: commitmessage
+        run: echo "::set-output name=commitmessage::$(git log -1 --pretty=format:"%s")"
+        id: commitmessage
+        
+      - name: release
+        uses: actions/create-release@v1
+        id: create_release
         with:
-          name: packaged-mod
-          path: mod_rng_free.zip
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.commitmessage.outputs.commitmessage }}
+          tag_name: ${{ github.ref }}
+          body_path: README.md
+          
+      - name: upload mod artifact
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.zipmod.outputs.upload_url }}
+          asset_path: ./mod_rng_free.zip
+          asset_name: mod_rng_free.zip
+          asset_content_type: application/gzip
