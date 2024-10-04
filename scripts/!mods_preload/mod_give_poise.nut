@@ -1,11 +1,8 @@
 // Give all tactical actors the poise effect when they are initialized.
 ::mods_hookExactClass("entity/tactical/actor", function(o) {
-	local original_onInit;
-	if ("onInit" in o) {
-		original_onInit = o.onInit;
-	} else {
-		original_onInit = function(){};
-	}
+	while(!("onInit" in o)) o = o[o.SuperName];
+
+	local original_onInit = o.onInit;
 	o.onInit = function() {
 		original_onInit();
 		this.m.Skills.add(new("scripts/skills/effects/poise"));
