@@ -33,7 +33,7 @@ jobs:
         run: echo "::set-output name=commitmessage::$(git log -1 --pretty=format:"%s")"
         id: commitmessage
         
-      - name: release
+      - name: create_release
         uses: actions/create-release@v1
         id: create_release
         with:
@@ -48,7 +48,7 @@ jobs:
       - name: upload mod artifact
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.zipmod.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./mod_rng_free.zip
           asset_name: mod_rng_free.zip
           asset_content_type: application/gzip
