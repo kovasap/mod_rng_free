@@ -41,6 +41,8 @@ jobs:
           release_name: ${{ steps.commitmessage.outputs.commitmessage }}
           tag_name: ${{ github.ref }}
           body_path: README.md
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
           
       - name: upload mod artifact
         uses: actions/upload-release-asset@v1
@@ -49,3 +51,5 @@ jobs:
           asset_path: ./mod_rng_free.zip
           asset_name: mod_rng_free.zip
           asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
