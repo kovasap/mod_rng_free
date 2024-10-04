@@ -1,13 +1,10 @@
-// Give all tactical actors the poise effect when they are initialized.
-::mods_hookChildren("entity/tactical/actor", function(o) {
-	local original_onAfterInit;
-	if ("onAfterInit" in o) {
-		original_onAfterInit = o.onAfterInit;
-	} else {
-		original_onAfterInit = function(){};
-	}
-	o.onAfterInit = function() {
-		original_onAfterInit();
-		this.getSkills().add(new("scripts/skills/effects/poise"));
+// Give all tactical actors the poise effect when the tactical board is spawned.
+::mods_hookExactClass("entity/tactical/tactical_entity_manager", function(o) {
+	local original_spawn = o.spawn;
+	o.spawn = function(_properties) {
+		original_spawn(_properties);
+		foreach( i in this.getAllInstancesAsArray() ) {
+			i.getSkills().add(new("scripts/skills/effects/poise"));
+		}
 	}
 });
