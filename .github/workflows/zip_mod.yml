@@ -40,7 +40,7 @@ jobs:
           draft: false
           prerelease: false
           release_name: ${{ steps.commitmessage.outputs.commitmessage }}
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.run_id }}
           body_path: README.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
