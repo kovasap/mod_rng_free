@@ -149,14 +149,13 @@
 			isHit = r <= toHit;
 		}
 
-		if (!("Poise" in _targetEntity.m)) {
-		  _targetEntity.m.Poise <- 1;
-		}
-
-		if (_targetEntity.m.Poise > 0) {
-		  isHit = false;
-			_targetEntity.m.Poise -= 1;
-			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used Poise to dodge the next attack.  Poise remaining is " + _targetEntity.m.Poise);
+		if (_targetEntity.getSkills().hasSkill("effects.poise")) {
+			local poise = _targetEntity.getSkills().getSkillByID("effects.poise");
+			if (poise.m.Count > 0) {
+				isHit = false;
+				poise.useToDodge();
+				this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used Poise to dodge the next attack.  Poise remaining is " + poise.m.Count);
+			}
 		}
 
 		if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
