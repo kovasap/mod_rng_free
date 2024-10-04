@@ -27,4 +27,10 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: zip mod_rng_free.zip scripts/
+        run: zip mod_rng_free.zip scripts/**
+
+      - name: Upload packaged mod
+        uses: actions/upload-artifact@v4
+        with:
+          name: packaged-mod
+          path: mod_rng_free.zip
