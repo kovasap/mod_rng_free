@@ -90,7 +90,7 @@
 
 		if (defense > -100 && skill > -100)
 		{
-			toHit = this.Math.max(1, this.Math.min(99, toHit));
+			toHit = this.Math.max(0, this.Math.min(100, toHit));
 		}
 
 		_targetEntity.onAttacked(_user);
@@ -138,7 +138,26 @@
 			}
 		}
 
+		r = 0;  // Override randomness so hit chance is always 100%
+
 		local isHit = r <= toHit;
+
+		if (isHit && this.Math.rand(1, 100) <= _targetEntity.getCurrentProperties().RerollDefenseChance)
+		{
+			r = this.Math.rand(1, 100);
+			r = 0;  // Override randomness so hit chance is always 100%
+			isHit = r <= toHit;
+		}
+
+		if (!("Poise" in _targetEntity.m)) {
+		  _targetEntity.m.Poise <- 1;
+		}
+
+		if (_targetEntity.m.Poise > 0) {
+		  isHit = false;
+			_targetEntity.m.Poise -= 1;
+			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used Poise to dodge the next attack.  Poise remaining is " + _targetEntity.m.Poise);
+		}
 
 		if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
 		{
@@ -151,11 +170,11 @@
 				{
 					if (isHit)
 					{
-						this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and the shot goes astray and hits " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(99, this.Math.max(1, toHit)) + ", Rolled: " + rolled + ")");
+						this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and the shot goes astray and hits " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(100, this.Math.max(0, toHit)) + ", Rolled: " + rolled + ")");
 					}
 					else
 					{
-						this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and the shot goes astray and misses " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(99, this.Math.max(1, toHit)) + ", Rolled: " + rolled + ")");
+						this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and the shot goes astray and misses " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(100, this.Math.max(0, toHit)) + ", Rolled: " + rolled + ")");
 					}
 				}
 				else
@@ -167,23 +186,17 @@
 			{
 				if (isHit)
 				{
-					this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and hits " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(99, this.Math.max(1, toHit)) + ", Rolled: " + rolled + ")");
+					this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and hits " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(100, this.Math.max(0, toHit)) + ", Rolled: " + rolled + ")");
 				}
 				else
 				{
-					this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and misses " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(99, this.Math.max(1, toHit)) + ", Rolled: " + rolled + ")");
+					this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and misses " + this.Const.UI.getColorizedEntityName(_targetEntity) + " (Chance: " + this.Math.min(100, this.Math.max(0, toHit)) + ", Rolled: " + rolled + ")");
 				}
 			}
 			else
 			{
 				this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and hits " + this.Const.UI.getColorizedEntityName(_targetEntity));
 			}
-		}
-
-		if (isHit && this.Math.rand(1, 100) <= _targetEntity.getCurrentProperties().RerollDefenseChance)
-		{
-			r = this.Math.rand(1, 100);
-			isHit = r <= toHit;
 		}
 
 		if (isHit)
@@ -398,7 +411,7 @@
 				}
 			}
 
-			return this.Math.max(1, this.Math.min(99, toHit));
+			return this.Math.max(0, this.Math.min(100, toHit));
 		}
 	}
 });
