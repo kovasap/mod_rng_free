@@ -3,6 +3,7 @@ poise_effect <- inherit("scripts/skills/skill", {
 		Count = 1;
 		Max = 3;
 		Refresh = 1;
+		IsStacking = false;
 	}
 
 	function create() {
@@ -13,7 +14,6 @@ poise_effect <- inherit("scripts/skills/skill", {
 		m.Overlay				= "perk_19";
 		m.Type					= Const.SkillType.StatusEffect;
 		m.IsActive				= false;
-		m.IsStacking			= false;
 		m.IsRemovedAfterBattle	= true;
 	}
 
