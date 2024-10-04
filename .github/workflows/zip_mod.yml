@@ -27,7 +27,7 @@ jobs:
 
       # unnecessary because the release by default zips all the source code!
       - name: zipmod
-        run: zip mod_rng_free.zip scripts/!mods_preload/*
+        run: zip -r mod_rng_free.zip scripts
 
       - name: commitmessage
         run: echo "::set-output name=commitmessage::$(git log -1 --pretty=format:"%s")"
