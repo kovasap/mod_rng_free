@@ -1,8 +1,8 @@
 // Give all tactical actors the poise effect when they are initialized.
-::mods_hookBaseClass("entity/tactical/actor", function(o) {
-	local original_onInit = o.onInit;
-	o.onInit = function() {
-		original_onInit();
+::mods_hookChildren("entity/tactical/actor", function(o) {
+	local original_onAfterInit = o.onAfterInit;
+	o.onAfterInit = function() {
+		original_onAfterInit();
 		this.getSkills().add(new("scripts/skills/effects/poise"));
 	}
 });
