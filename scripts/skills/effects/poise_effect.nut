@@ -1,9 +1,9 @@
 poise_effect <- inherit("scripts/skills/skill", {
 	m = {
-		Count = 1;
-		Max = 3;
-		Refresh = 1;
-		IsStacking = false;
+		Count = 1
+		Max = 3
+		Refresh = 1
+		IsStacking = false
 	}
 
 	function create() {
@@ -61,5 +61,10 @@ poise_effect <- inherit("scripts/skills/skill", {
 		}
 		// if (--m.TurnsLeft <= 0)
 		// 	removeSelf();
+	}
+
+	function isHidden()
+	{
+		return !this.getContainer().getActor().isPlacedOnMap();
 	}
 });
