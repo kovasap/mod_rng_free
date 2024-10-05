@@ -17,7 +17,7 @@ defensive_stance <- inherit("scripts/skills/skill", {
 		m.IsStacking = false;
 		m.IsAttack = false;
 		m.ActionPointCost = 9;
-		m.FatigueCost = 0;
+		m.FatigueCost = 20;
 		m.MinRange = 0;
 		m.MaxRange = 0;
 	}
@@ -52,7 +52,7 @@ defensive_stance <- inherit("scripts/skills/skill", {
 
 	function onUse( _user, _targetTile )
 	{
-   		 _user.getSkillByID("effects.poise").m.Count += 3;
+   		 _user.getSkills().getSkillByID("effects.poise").m.Count += 3;
 
 		if (!_user.isHiddenToPlayer())
 		{
