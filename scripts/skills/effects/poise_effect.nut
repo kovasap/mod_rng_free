@@ -56,22 +56,22 @@ poise_effect <- inherit("scripts/skills/skill", {
 		if (getContainer().getActor().isArmedWithShield()) {
 			m.Refresh = 3;
 		}
+		if (m.Count == 0) {
+			m.Icon = "ui/perks/perk_19_sw.png";
+		} else {
+			m.Icon = "ui/perks/perk_19.png";
+		}
 	}
 
 	function useToDodge() {
-	  --m.Count;
-	  if (m.Count == 0) {
-			m.Icon = "ui/perks/perk_19_sw.png";
-		}
+		--m.Count;
 	}
 
 	function onRoundEnd() {
-	  if (m.Count < m.Max) {
-			m.Count += m.Refresh;
-			m.Icon = "ui/perks/perk_19.png";
+		m.Count += m.Refresh;
+		if (m.Count > m.Max) {
+			m.Count = m.Max;
 		}
-		// if (--m.TurnsLeft <= 0)
-		// 	removeSelf();
 	}
 
 	function isHidden()
