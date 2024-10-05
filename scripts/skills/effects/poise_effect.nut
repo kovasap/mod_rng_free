@@ -1,7 +1,7 @@
 poise_effect <- inherit("scripts/skills/skill", {
 	m = {
 		Count = 1
-		Max = 3
+		Max = 4
 		Refresh = 1
 		IsStacking = false
 	}
@@ -35,8 +35,12 @@ poise_effect <- inherit("scripts/skills/skill", {
 			return m.Name + " (x" + m.Count + ")";
 	}
 
+	function setMax() {
+		m.Max = Math.min(5, Math.max(1, 1 + Math.floor(getContainer().getActor().getCurrentProperties().MeleeDefense / 10)));
+	}
+
 	function onAdded() {
-	  m.Max = Math.max(1, 1 + Math.floor(getContainer().getActor().getCurrentProperties().MeleeDefense / 10));
+		setMax()
 		m.Count = m.Max;
 	}
 
@@ -45,6 +49,13 @@ poise_effect <- inherit("scripts/skills/skill", {
 	}
 
 	function onUpdate(_properties) {
+	}
+
+	function onAfterUpdate(_properties) {
+		setMax()
+		if (getContainer().getActor().isArmedWithShield()) {
+			m.Refresh = 3;
+		}
 	}
 
 	function useToDodge() {
@@ -56,7 +67,7 @@ poise_effect <- inherit("scripts/skills/skill", {
 
 	function onRoundEnd() {
 	  if (m.Count < m.Max) {
-			++m.Count;
+			m.Count += m.Refresh;
 			m.Icon = "ui/perks/perk_19.png";
 		}
 		// if (--m.TurnsLeft <= 0)
