@@ -6,7 +6,13 @@ A Battle Brothers mod that removes hit chances and other randomness from combat.
 
 Every attack made will hit its target, UNLESS the target has some way to make the attack change from a guaranteed hit to a guaranteed miss.
 
+<<<<<<< HEAD
 If a character still has AP and Fat remaining in the round, <the attack cost> AP + 5 Fat will be used to dodge the attack.
+=======
+If a character still has AP and Fat remaining in the round, 2 AP + 5 Fat will be used to dodge the attack.
+In the future I might change the AP/Fat costs to scale off of attacker Matk and defender Mdef.
+It may also make sense for the dodge AP cost to scale with the AP cost of the attack, e.g. a 6 AP attack will cost 6 AP to dodge.
+>>>>>>> f844ef6dd2a8740446c28864aaf8f96cf9fde19f
 
 If a character is shieldwalling, they cannot be hit.
 
