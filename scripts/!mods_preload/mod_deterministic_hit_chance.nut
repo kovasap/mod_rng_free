@@ -160,11 +160,11 @@
 			}
 		}
 
-		if (_targetEntity.getActionPoints() >= 2 && (_targetEntity.getFatigueMax() - _targetEntity.getFatigue()) > 5) {
-			_targetEntity.m.ActionPoints -= 2;
+		if (_targetEntity.getActionPoints() >= this.m.ActionPointCost && (_targetEntity.getFatigueMax() - _targetEntity.getFatigue()) > 5) {
+			_targetEntity.m.ActionPoints -= this.m.ActionPointCost;
 			_targetEntity.m.Fatigue += 5;
 			isHit = false;
-			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used 2 AP and 5 Fat to dodge the next attack.";
+			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used " + this.m.ActionPointCost + " AP and 5 Fat to dodge the next attack.";
 		}
 
 		if (!this.m.IsShieldwallRelevant && _targetEntity.getSkills().hasSkill("effects.shieldwall")) {
