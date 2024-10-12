@@ -5,6 +5,7 @@ action_point_tooltip <- inherit("scripts/skills/skill", {
 		m.ID					= "effects.ap_tooltip";
 		m.Name					= "AP Tooltip";
 		m.Icon					= "ui/perks/perk_25.png";
+		// Doesn't exist in bushes/ui.brush
 		//m.IconMini				= "perk_25_mini";
 		m.Overlay				= "perk_25";
 		m.Type					= Const.SkillType.StatusEffect;
