@@ -169,13 +169,13 @@
 			isHit = false;
 			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used " + this.m.ActionPointCost + " AP and 5 Fat to dodge the next attack.");
 		}
-		*/
 
 		if (!this.m.IsShieldwallRelevant && _targetEntity.getSkills().hasSkill("effects.shieldwall")) {
 			isHit = false;
 			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " dodged the next attack with shieldwall.");
 		}
-
+		*/
+		
 		if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
 		{
 			local rolled = r;
