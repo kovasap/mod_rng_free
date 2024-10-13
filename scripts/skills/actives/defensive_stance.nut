@@ -52,7 +52,7 @@ defensive_stance <- inherit("scripts/skills/skill", {
 
 	function onUse( _user, _targetTile )
 	{
-   		 _user.getSkills().getSkillByID("effects.poise").m.Count += 3;
+   		 _user.getSkills().getSkillByID("effects.poise").m.Count += 4;
 
 		if (!_user.isHiddenToPlayer())
 		{

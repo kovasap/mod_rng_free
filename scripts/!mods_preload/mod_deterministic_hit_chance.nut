@@ -153,19 +153,23 @@
 
 		if (_targetEntity.getSkills().hasSkill("effects.poise")) {
 			local poise = _targetEntity.getSkills().getSkillByID("effects.poise");
-			if (poise.m.Count > 0) {
+			if (poise.canDodge(this)) {
 				isHit = false;
-				poise.useToDodge();
+				poise.useToDodge(this);
 				this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used Poise to dodge the next attack.  Poise remaining is " + poise.m.Count);
 			}
 		}
 
+		/*
+		 * AP dodging system
+		 *
 		if (_targetEntity.getActionPoints() >= this.m.ActionPointCost && (_targetEntity.getFatigueMax() - _targetEntity.getFatigue()) > 5) {
 			_targetEntity.m.ActionPoints -= this.m.ActionPointCost;
 			_targetEntity.m.Fatigue += 5;
 			isHit = false;
 			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used " + this.m.ActionPointCost + " AP and 5 Fat to dodge the next attack.");
 		}
+		*/
 
 		if (!this.m.IsShieldwallRelevant && _targetEntity.getSkills().hasSkill("effects.shieldwall")) {
 			isHit = false;

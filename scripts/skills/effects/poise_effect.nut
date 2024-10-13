@@ -2,18 +2,18 @@ poise_effect <- inherit("scripts/skills/skill", {
 	m = {
 		Count = 1
 		Max = 4
-		Refresh = 1
-		IsStacking = false
+		Refresh = 2
 	}
 
 	function create() {
 		m.ID					= "effects.poise";
 		m.Name					= "Poise";
 		m.Icon					= "ui/perks/perk_19.png";
-		m.IconMini				= "perk_19_mini";
+		m.IconMini			= "perk_19_mini";
 		m.Overlay				= "perk_19";
 		m.Type					= Const.SkillType.StatusEffect;
 		m.IsActive				= false;
+		m.IsStacking			= false;
 		m.IsRemovedAfterBattle	= true;
 	}
 
@@ -35,12 +35,17 @@ poise_effect <- inherit("scripts/skills/skill", {
 			return m.Name + " (x" + m.Count + ")";
 	}
 
+	function getActorProperties() {
+	  return getContainer().getActor().getCurrentProperties();
+	}
+
 	function setMax() {
-		m.Max = Math.min(5, Math.max(1, 1 + Math.floor(getContainer().getActor().getCurrentProperties().MeleeDefense / 10)));
+		local def_sum = getActorProperties().MeleeDefense + getActorProperties().RangedDefense;
+		m.Max = 2 + Math.floor(def_sum / 10)));
 	}
 
 	function onAdded() {
-		setMax()
+		setMax();
 		m.Count = m.Max;
 	}
 
@@ -62,9 +67,21 @@ poise_effect <- inherit("scripts/skills/skill", {
 			m.Icon = "ui/perks/perk_19.png";
 		}
 	}
+	
+	function canDodge(skillToDodge) {
+		if (skillToDodge.m.ActionPointCost > 4) {
+			return m.Count > 1;
+		} else {
+			return m.Count > 0;
+		}
+	}
 
-	function useToDodge() {
-		--m.Count;
+	function useToDodge(skillToDodge) {
+		if (skillToDodge.m.ActionPointCost > 4) {
+			m.Count -= 2;
+		} else {
+			m.Count -= 1;
+		}
 	}
 
 	function onRoundEnd() {
