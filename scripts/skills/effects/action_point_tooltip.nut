@@ -16,6 +16,9 @@ action_point_tooltip <- inherit("scripts/skills/skill", {
 
 	function getDescription() {
 		local waiting_status = "";
+		if (!("getActor" in getContainer())) {
+			return "";
+		}
 		if (getContainer().getActor().m.IsWaitActionSpent) {
 			waiting_status = ", waiting";
 		}
