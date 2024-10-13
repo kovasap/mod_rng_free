@@ -58,9 +58,6 @@ poise_effect <- inherit("scripts/skills/skill", {
 
 	function onAfterUpdate(_properties) {
 		setMax()
-		if (getContainer().getActor().isArmedWithShield()) {
-			m.Refresh = 3;
-		}
 		if (m.Count == 0) {
 			m.Icon = "ui/perks/perk_19_sw.png";
 		} else {
