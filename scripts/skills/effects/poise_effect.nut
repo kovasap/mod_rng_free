@@ -41,7 +41,7 @@ poise_effect <- inherit("scripts/skills/skill", {
 
 	function setMax() {
 		local def_sum = getActorProperties().MeleeDefense + getActorProperties().RangedDefense;
-		m.Max = 2 + Math.floor(def_sum / 10)));
+		m.Max = 2 + Math.floor(def_sum / 10);
 	}
 
 	function onAdded() {
