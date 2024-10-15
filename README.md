@@ -4,23 +4,29 @@ A Battle Brothers mod that removes hit chances and other randomness from combat.
 
 ## Features
 
-Every attack made will hit its target, UNLESS the target has some way to make the attack change from a guaranteed hit to a guaranteed miss.
+### Poise
 
-If a character still has AP and Fat remaining in the round, <the attack cost> AP + 5 Fat will be used to dodge the attack.
-In the future I might change the AP/Fat costs to scale off of attacker Matk and defender Mdef.
-It may also make sense for the dodge AP cost to scale with the AP cost of the attack, e.g. a 6 AP attack will cost 6 AP to dodge.
+This mod uses a new stat called **poise** to determine if the target of an
+attack will be hit or not.
 
-If a character is shieldwalling, they cannot be hit.
+Simply put, every attack has a "poise damage" value based on its AP cost (1 for
+<5 AP, 2 for >=5 AP).
+If the defender's current poise is less than this value, the defender will be
+hit, otherwise they will be missed and the "poise damage" will be subtracted
+from their current poise.
 
-I may change it so that Melee and Ranged Skill scale damage, right now they do nothing.
+By default characters regenerate 2 poise per turn.
 
-**Poise is currently disabled!**
-All characters also have **poise**, which is simply a count of how many times a character can dodge before they are hit.
+Max (and starting) poise is determined like so: MaxPoise = (Mdef + Rdef) / 10
+rounded down.
 
- - Each character's starting and maximum poise is determined by Mdef.
- - Each character recovers one poise per turn.
- - Shields give extra poise.
- - All characters can use a 9AP "defensive stance" skill to gain 3 poise.
+NOT YET IMPLEMENTED: using "shieldwall" will regenerate 4 poise.
+
+#### Poise Examples
+
+In a 1v1 neither party will be able to hit the other if they both regenerate 2
+poise per turn.
+
 
 ## Installing
 
