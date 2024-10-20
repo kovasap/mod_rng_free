@@ -17,7 +17,7 @@ some missed attacks before they understand the target's movement/defenses and
 can start hitting.
 
 To the player, this count would be displayed in place of the hit chance preview
-window, as long as an indicator that the next attack will hit or miss.
+window, as long as an indicator that the next attack will hit or miss.  Also all characters that can be hit by some other living character get an indicator over them that says they are in danger.
 
 Some thoughts about how this would change the game:
 
@@ -26,7 +26,7 @@ Some thoughts about how this would change the game:
  - "Breakpoints" for matk/mdef would exist that give you an extra free dodge/attack
  - This system may not work very well for ranged attacks
 
-
+When shieldwalling, the character gets +2 to all "adaptation" counters to let them hold on a bit longer.  This goes up to the original max to prevent spam.
 
 ## Poise
 
