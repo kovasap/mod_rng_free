@@ -37,11 +37,13 @@
 			if (_skill.isRanged()) {
 				dmgMult *= p.DamageReceivedRangedMult;
 				dmgMult *= ((_attacker.m.CurrentProperties.getRangedSkill()
-										 - this.m.CurrentProperties.getRangedDefense() - 50) / 100) + 1;
+										 - this.m.CurrentProperties.getRangedDefense()
+										   - 80) / 100) + 1;
 			} else {
 				dmgMult *= p.DamageReceivedMeleeMult;
 				dmgMult *= ((_attacker.m.CurrentProperties.getMeleeSkill()
-										 - this.m.CurrentProperties.getMeleeDefense() - 50) / 100) + 1;
+										 - this.m.CurrentProperties.getMeleeDefense()
+										   - 80) / 100) + 1;
 			}
 		}
 

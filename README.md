@@ -25,8 +25,13 @@ poise as well as the fat regen.
 
 Since hit change is always 100% or 0%, these stats now effect the damage done by
 weapons.
-A new damage multiplier is calculated like (atk - def - 50) / 100 + 1 and
+A new damage multiplier is calculated like (atk - def - 80) / 100 + 1 and
 applied at the end of the damage calculation.
+
+This effectively makes an 80% hit chance the "break even" point where damage is
+unchanged.
+Any chance below this and damage will be reduced, any above it and damage will
+be increased.
 
 ### Ranged attacks
 
