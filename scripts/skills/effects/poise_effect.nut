@@ -42,13 +42,13 @@ poise_effect <- inherit("scripts/skills/skill", {
 	}
 
 	function setMax() {
-	  m.Max = Math.floor(getActor().getFatigueMax() / 20);
+	  m.Max = Math.floor(getActorProperties().Stamina / 20);
 	}
 
 	function onAdded() {
 		setMax();
 		m.Count = m.Max;
-		this.logDebug(getActor().getName() + " has " + getActor().getFatigueMax() + " fatigue and will therefore start with " + m.Count + " poise.");
+		this.logDebug(getActor().getName() + " has " + getActorProperties().Stamina + " stamina and will therefore start with " + m.Count + " poise.");
 	}
 
 	function onRefresh() {
