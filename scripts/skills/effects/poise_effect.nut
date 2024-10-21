@@ -1,7 +1,7 @@
 poise_effect <- inherit("scripts/skills/skill", {
 	m = {
-		Count = 0
-		Max = 0
+		Count = -1
+		Max = -1
 		Refresh = 1
 	}
 
@@ -42,13 +42,12 @@ poise_effect <- inherit("scripts/skills/skill", {
 	}
 
 	function setMax() {
-	  m.Max = Math.floor(getActorProperties().Stamina / 20);
+	  m.Max = Math.floor(getActor().getFatigueMax() / 20);
 	}
 
 	function onAdded() {
-		setMax();
-		m.Count = m.Max;
-		this.logDebug(getActor().getName() + " has " + getActorProperties().Stamina + " stamina and will therefore start with " + m.Count + " poise.");
+	  // This happens too early for the effect to work with actor properties,
+		// since it seems they aren't set yet?
 	}
 
 	function onRefresh() {
@@ -84,6 +83,11 @@ poise_effect <- inherit("scripts/skills/skill", {
 	}
 
 	function onRoundEnd() {
+		setMax();
+		if (m.Count == -1) {
+			m.Count = m.Max;
+			this.logDebug(getActor().getName() + " has " + getActor().getFatigueMax() + " stamina and will therefore start with " + m.Count + " poise.");
+		}
 		m.Count += m.Refresh;
 		if (m.Count > m.Max) {
 			m.Count = m.Max;
