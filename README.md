@@ -15,7 +15,7 @@ from their current poise.
 
 By default characters regenerate 1 poise per turn.
 
-Max (and starting) poise is determined like so: [max FAT after armor] / 20
+Max (and starting) poise is determined like so: [max FAT after armor] / 15
 rounded down.
 
 All characters have recover, and recover regenerates back to 75% of starting

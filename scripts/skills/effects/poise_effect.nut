@@ -42,7 +42,7 @@ poise_effect <- inherit("scripts/skills/skill", {
 	}
 
 	function setMax() {
-	  m.Max = Math.floor(getActor().getFatigueMax() / 20);
+	  m.Max = Math.floor(getActor().getFatigueMax() / 15);
 	}
 
 	function onAdded() {
