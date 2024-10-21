@@ -1,5 +1,5 @@
 ::mods_hookClass("entity/tactical/actor", function(o) {
-  o.onDamageReceived = function onDamageReceived( _attacker, _skill, _hitInfo )
+  function onDamageReceived( _attacker, _skill, _hitInfo )
 	{
 		if (!this.isAlive() || !this.isPlacedOnMap())
 		{

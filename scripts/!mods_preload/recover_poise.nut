@@ -34,7 +34,6 @@
 			local poise = _targetEntity.getSkills().getSkillByID("effects.poise");
 			poise.m.Count = Math.floor(poise.m.Max * 0.75);
 			}
-		}
 		return original_onUse(_user, _targetTile);
 	}
 });
