@@ -29,10 +29,8 @@ poise_effect <- inherit("scripts/skills/skill", {
 	}
 
 	function getName() {
-		if (m.Count <= 1)
-			return m.Name;
-		else
-			return m.Name + " (x" + m.Count + ")";
+		setMax();
+		return m.Name + " (" + m.Count + "/" + m.Max + ")";
 	}
 
 	function getActor() {
@@ -50,6 +48,7 @@ poise_effect <- inherit("scripts/skills/skill", {
 	function onAdded() {
 		setMax();
 		m.Count = m.Max;
+		this.logDebug(getActor().getName() + " has " + getActor().getFatigueMax() + " fatigue and will therefore start with " + m.Count + " poise.");
 	}
 
 	function onRefresh() {
