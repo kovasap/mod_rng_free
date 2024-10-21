@@ -1,8 +1,8 @@
 poise_effect <- inherit("scripts/skills/skill", {
 	m = {
-		Count = 1
-		Max = 4
-		Refresh = 2
+		Count = 0
+		Max = 0
+		Refresh = 1
 	}
 
 	function create() {
@@ -35,13 +35,16 @@ poise_effect <- inherit("scripts/skills/skill", {
 			return m.Name + " (x" + m.Count + ")";
 	}
 
+	function getActor() {
+	  return getContainer().getActor();
+	}
+
 	function getActorProperties() {
-	  return getContainer().getActor().getCurrentProperties();
+	  return getActor().getCurrentProperties();
 	}
 
 	function setMax() {
-		local def_sum = getActorProperties().MeleeDefense + getActorProperties().RangedDefense;
-		m.Max = 2 + Math.floor(def_sum / 10);
+	  m.Max = Math.floor(getActor().getFatigueMax() / 20);
 	}
 
 	function onAdded() {
