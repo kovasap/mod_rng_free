@@ -17,6 +17,7 @@ By default characters regenerate 1 poise per turn.
 
 Max (and starting) poise is determined like so: [max FAT after armor] / 15
 rounded down.
+The most max poise you can have is 6, regardless if you have more than 6*15 FAT.
 
 All characters have recover, and recover regenerates back to 75% of starting
 poise as well as the fat regen.

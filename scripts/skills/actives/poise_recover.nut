@@ -2,8 +2,8 @@ poise_recover <- inherit("scripts/skills/skill", {
 	m = {},
 	function create()
 	{
-		m.ID = "actives.recover";
-		m.Name = "Recover";
+		m.ID = "actives.poise_recover";
+		m.Name = "Poise Recover";
 		m.Description = "Take a deep breath and rest for a turn in order to recover your strength.";
 		m.Icon = "ui/perks/perk_54_active.png";
 		m.IconDisabled = "ui/perks/perk_54_active_sw.png";
