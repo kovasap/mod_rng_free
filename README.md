@@ -24,6 +24,8 @@ poise as well as the fat regen.
 
 ### Matk, Mdef, Ratk, Rdef
 
+TODO change this so that these stats instead allow you to equip higher and higher tier weapons instead at certain thresholds.
+
 Since hit change is always 100% or 0%, these stats now effect the damage done by
 weapons.
 A new damage multiplier is calculated like (atk - def - 80) / 100 + 1 and
