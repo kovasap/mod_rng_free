@@ -24,7 +24,7 @@ poise as well as the fat regen.
 
 ### Matk, Mdef, Ratk, Rdef
 
-TODO change this so that these stats instead allow you to equip higher and higher tier weapons instead at certain thresholds.
+#### Current Implementation
 
 Since hit change is always 100% or 0%, these stats now effect the damage done by
 weapons.
@@ -35,6 +35,14 @@ This effectively makes an 80% hit chance the "break even" point where damage is
 unchanged.
 Any chance below this and damage will be reduced, any above it and damage will
 be increased.
+
+#### Intended Future Changes
+
+With poise, FAT essentially becomes your defensive stat.
+Keeping with this theme, I should change Matk, Mdef, Ratk, Rdef to take up some of the offensive capability previously provided by FAT.
+One idea to do this is to make all special weapon skills now use the basic attack FAT, but now also require use of a new resource called "skill", for which the starting value and regen rate is determined by Matk, Mdef, Ratk, Rdef.
+
+For instance, shieldwall would require Rdef skill, indom would require Mdef skill, and ripose would require both Mdef and Matk skill.
 
 ### Ranged attacks
 
