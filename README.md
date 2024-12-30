@@ -1,11 +1,82 @@
 # mod_rng_free
 
-A Battle Brothers mod that removes hit chances and other randomness from combat.
+A Battle Brothers mod that removes hit chances from combat.
 
-## Poise
+## Intended Future Direction and Design (not yet implemented)
 
-This mod uses a new stat called **poise** to determine if the target of an
-attack will be hit or not.
+### Fatigue as "Shield"
+
+Instead of checking whether an attack hits or misses against a dice roll, each
+attack type has a fatigue cost that is automatically paid to dodge the attack.
+If the cost cannot be paid, the attack hits.  Some example costs could look like:
+
+ - 1-handed sword swing: 8 fatigue
+ - 1-handed hammer swing: 5 fatigue
+ - 2-handed axe swing: 14 fatigue
+ - bow attack: 4 fatigue
+ - bow "aimed shot" attack: 11 fatigue
+
+This is similar to how a "shield" system could work in a sci-fi setting (the
+shield takes damage before the wearer, preventing injury).
+
+Weapons would now have a new trade off to play with when defining their stats.
+Battle Brothers already has weapons that are better against armor vs hp; now
+some weapons (like the whip) could be the hardest to dodge and be weak at
+actually doing damage.
+
+With this system, the player would have a choice when building their brothers
+defenses to either (1) focus on light armor and have a large fatigue pool to use
+for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
+something in the middle.
+
+This new fatigue sink would lead to brothers running out of fatigue and becoming
+paralyzed (or just relying on the base fatigue regeneration per turn) very
+quickly if nothing else changed.
+To fix this, attacks will no longer cost fatigue to perform.
+Instead, the player on their turn will have the option to either attack, or use
+"recover" (which all brothers will be given by default) to regenerate some
+fatigue as a defensive action.
+
+### Matk, Mdef, Ratk, Rdef Grant Skill Points To Fuel Skills
+
+Since hit change is always 100% or 0%, these stats no longer have any meaning.
+To make them relevant, so that decisions when leveling brothers are more
+interesting, these stats now grant a special resource in combat known as a
+"skill" point that is granted to a brother every turn.
+
+For example, if a brother has 80 Matk and 20 Mdef, then based on some yet
+undefined formula they will be granted say 3 melee attack skill points and 2
+melee defense skill points that refresh to these values every turn.
+Alternatively, these points could be also just granted once at the start of
+combat and never refresh.
+
+These skill points are then spent as currency to use all non-basic skills.
+For example, "shieldwall" would require a melee defense skill point to use.
+"Riposte" would require a melee attack AND melee defense skill point to use.
+
+This system would reward players for investing in these stats with cool new
+abilities to use.
+It would also continue to constrain the ability to spam powerful abilities, as
+fatigue does in the base game.
+
+### Skill Changes
+
+ - **Recover**: No longer tied to a perk, and given to all brothers by default.
+ - **Shieldwall**: Reduces the fatigue cost to dodge/block an attack.
+
+### Strategy Changes
+
+With getting hit being an inevitability, building "ultra tank" brothers that are
+designed to dodge 95% of attacks would no longer be possible.
+It will be more important that ever to position brothers so that one single
+brother isn't exposed to too many attacks per turn.
+
+## Current Implementation
+
+### Poise
+
+This mod currently uses a new stat called **poise** to determine if the target
+of an attack will be hit or not.
 
 Simply put, every attack has a "poise damage" value based on its AP cost (1 for
 <5 AP, 2 for >=5 AP).
@@ -24,8 +95,6 @@ poise as well as the fat regen.
 
 ### Matk, Mdef, Ratk, Rdef
 
-#### Current Implementation
-
 Since hit change is always 100% or 0%, these stats now effect the damage done by
 weapons.
 A new damage multiplier is calculated like (atk - def - 80) / 100 + 1 and
@@ -35,14 +104,6 @@ This effectively makes an 80% hit chance the "break even" point where damage is
 unchanged.
 Any chance below this and damage will be reduced, any above it and damage will
 be increased.
-
-#### Intended Future Changes
-
-With poise, FAT essentially becomes your defensive stat.
-Keeping with this theme, I should change Matk, Mdef, Ratk, Rdef to take up some of the offensive capability previously provided by FAT.
-One idea to do this is to make all special weapon skills now use the basic attack FAT, but now also require use of a new resource called "skill", for which the starting value and regen rate is determined by Matk, Mdef, Ratk, Rdef.
-
-For instance, shieldwall would require Rdef skill, indom would require Mdef skill, and ripose would require both Mdef and Matk skill.
 
 ### Ranged attacks
 
