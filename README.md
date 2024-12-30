@@ -24,7 +24,7 @@ Battle Brothers already has weapons that are better against armor vs hp; now
 some weapons (like the whip) could be the hardest to dodge and be weak at
 actually doing damage.
 
-With this system, the player would have a choice when building their brothers
+With this system, the player would have a choice when building their brother's
 defenses to either (1) focus on light armor and have a large fatigue pool to use
 for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
 something in the middle.
@@ -59,6 +59,11 @@ abilities to use.
 It would also continue to constrain the ability to spam powerful abilities, as
 fatigue does in the base game.
 
+#### Mdef and Rdef Impact Fatigue Recovery
+
+Since there are not too many defensive skills, Mdef and Rdef could also affect
+the fatigue recovery of bros slightly (like the "iron lungs" trait does).
+
 ### Skill Changes
 
  - **Recover**: No longer tied to a perk, and given to all brothers by default.
@@ -71,7 +76,19 @@ designed to dodge 95% of attacks would no longer be possible.
 It will be more important that ever to position brothers so that one single
 brother isn't exposed to too many attacks per turn.
 
+### AI and Enemy Changes
+
+Some enemy stats (notably fatigue) may have to be tweaked to make this proposed
+design playable.
+
+Ideally this mod would not require changing any of the AI logic in the game.
+
 ## Current Implementation
+
+This is what is currently implemented in this repository.
+Feel free to play with it, but it hasn't been extensively tested for balance.
+It does give a decent feeling of what playing without hit chance feels like in
+Battle Brothers though!
 
 ### Poise
 
