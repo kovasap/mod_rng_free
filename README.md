@@ -2,6 +2,18 @@
 
 A Battle Brothers mod that removes hit chances from combat.
 
+## Simple future direction: Add a fixed number of dodges to each character per turn
+
+This should be implemented as a separate mod.
+
+Simply give each character a single free dodge per turn.
+This idea was partially inspired by FTL's "shield" system.
+In FTL, each attack has a hit chance, but each ship has one or more shields that
+will block shots 100% of the time and be used up.
+This makes the RNG less extreme, as the player does not have to worry about
+getting hit until the shields are down - there's little potential for
+"oneshot"-ing.
+
 ## Intended Future Direction and Design (not yet implemented)
 
 ### Fatigue as "Shield"
