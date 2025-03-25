@@ -151,31 +151,10 @@
 			isHit = r <= toHit;
 		}
 
-		if (_targetEntity.getSkills().hasSkill("effects.poise")) {
-			local poise = _targetEntity.getSkills().getSkillByID("effects.poise");
-			if (poise.canDodge(this)) {
-				isHit = false;
-				poise.useToDodge(this);
-				this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used Poise to dodge the next attack.  Poise remaining is " + poise.m.Count);
-			}
-		}
+		// Multiply all damage by the hit chance
+		properties.DamageTotalMult *= toHit.tofloat() / 100.0;
 
-		/*
-		 * AP dodging system
-		 *
-		if (_targetEntity.getActionPoints() >= this.m.ActionPointCost && (_targetEntity.getFatigueMax() - _targetEntity.getFatigue()) > 5) {
-			_targetEntity.m.ActionPoints -= this.m.ActionPointCost;
-			_targetEntity.m.Fatigue += 5;
-			isHit = false;
-			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " used " + this.m.ActionPointCost + " AP and 5 Fat to dodge the next attack.");
-		}
 
-		if (!this.m.IsShieldwallRelevant && _targetEntity.getSkills().hasSkill("effects.shieldwall")) {
-			isHit = false;
-			this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(_targetEntity) + " dodged the next attack with shieldwall.");
-		}
-		*/
-		
 		if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
 		{
 			local rolled = r;
@@ -354,81 +333,6 @@
 			}
 
 			return false;
-		}
-	}
-	
-	while(!("getHitchance" in o)) o = o[o.SuperName]; // find the base class
-	if(!("hitchance_caps" in o))
-	{
-		o.hitchance_caps <- true;
-		o.getHitchance = function( _targetEntity )
-		{
-			if (!_targetEntity.isAttackable())
-			{
-				return 0;
-			}
-
-			local user = this.m.Container.getActor();
-			local properties = this.m.Container.buildPropertiesForUse(this, _targetEntity);
-
-			if (!this.isUsingHitchance())
-			{
-				return 100;
-			}
-
-			local defenderProperties = _targetEntity.getSkills().buildPropertiesForDefense(user, this);
-			local skill = this.m.IsRanged ? properties.RangedSkill * properties.RangedSkillMult : properties.MeleeSkill * properties.MeleeSkillMult;
-			local defense = _targetEntity.getDefense(user, this, defenderProperties);
-			local levelDifference = _targetEntity.getTile().Level - user.getTile().Level;
-			local distanceToTarget = user.getTile().getDistanceTo(_targetEntity.getTile());
-			local toHit = skill - defense;
-
-			if (this.m.IsRanged)
-			{
-				toHit = toHit + (distanceToTarget - this.m.MinRange) * properties.HitChanceAdditionalWithEachTile * properties.HitChanceWithEachTileMult;
-			}
-
-			if (levelDifference < 0)
-			{
-				toHit = toHit + this.Const.Combat.LevelDifferenceToHitBonus;
-			}
-			else
-			{
-				toHit = toHit + this.Const.Combat.LevelDifferenceToHitMalus * levelDifference;
-			}
-
-			if (!this.m.IsShieldRelevant)
-			{
-				local shield = _targetEntity.getItems().getItemAtSlot(this.Const.ItemSlot.Offhand);
-
-				if (shield != null && shield.isItemType(this.Const.Items.ItemType.Shield))
-				{
-					local shieldBonus = (this.m.IsRanged ? shield.getRangedDefense() : shield.getMeleeDefense()) * (_targetEntity.getCurrentProperties().IsSpecializedInShields ? 1.25 : 1.0);
-					toHit = toHit + shieldBonus;
-
-					if (!this.m.IsShieldwallRelevant && _targetEntity.getSkills().hasSkill("effects.shieldwall"))
-					{
-						toHit = toHit + shieldBonus;
-					}
-				}
-			}
-
-			toHit = toHit * properties.TotalAttackToHitMult;
-			toHit = toHit + this.Math.max(0, 100 - toHit) * (1.0 - defenderProperties.TotalDefenseToHitMult);
-			local userTile = user.getTile();
-
-			if (this.m.IsRanged && userTile.getDistanceTo(_targetEntity.getTile()) > 1)
-			{
-				local blockedTiles = this.Const.Tactical.Common.getBlockedTiles(userTile, _targetEntity.getTile(), user.getFaction(), true);
-
-				if (blockedTiles.len() != 0)
-				{
-					local blockChance = this.Const.Combat.RangedAttackBlockedChance * properties.RangedAttackBlockedChanceMult;
-					toHit = this.Math.floor(toHit * (1.0 - blockChance));
-				}
-			}
-
-			return this.Math.max(0, this.Math.min(100, toHit));
 		}
 	}
 });
