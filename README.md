@@ -2,6 +2,25 @@
 
 A Battle Brothers mod that removes hit chances from combat.
 
+## Goals
+
+Battle brothers is a game that heavily relies on RNG in combat.
+I'm not sure what the developers had in mind exactly when they choose to design the game this way,
+but from my time playing I see the following effects:
+
+ 1. Combat can be very tense when you have a brother in a bad position and a single hit could kill him.
+    Every dice roll feels very exciting in this situation.
+ 2. The game sometimes rewards the player when they make bad decisions, and sometimes punishes the player when they play perfectly.
+     - This, in addition to the opacity of the game mechanics in general, artificially extends ("pads") the amount of time it takes to master the game.
+       In other words, the game gives a pretty noisy feedback signal to the player.  This can be seen as a pro or a con.
+ 3. Perks/builds that increase effective HP (e.g. colossus) are extremely important to buffer against the worst case scenario.
+ 4. Matk/Mdef are extremely valuable stats.
+ 5. Early game can feel particularly random, and you can expect to lose many bros early on regardless of your skill level.
+
+In reflecting on these points, I started wondering how the game would feel if combat was more deterministic.
+Would it start feeling boring?  Or would it instead simply feel less frustrating?
+This mod is the experiment I'm using to find out.
+
 ## Changes
 
 All attacks have a 100% chance to hit, but their damage is scaled by what was
@@ -9,9 +28,8 @@ the hit chance.
 For example, what used to be an attack with a 5% hit change is now an attack
 that always hits, but for 5% damage.
 
-This idea behind this is that the expected hits to kill is the same, but is
-perfectly consistent now.
-In the base game, attacking can be very "swingy".
+This idea behind this is that the expected hits to kill is the same as vanilla,
+but now it will always take the the same number of hits to kill no matter what.
 
 This mod also adds an "action points remaining" tooltip to all enemies.
 I should probably remove this, but it was useful for previous iterations of the
@@ -23,7 +41,7 @@ Every commit to this repository will generate a GitHub release, from which you c
 
 ## Rejected Ideas
 
-## Add a fixed number of dodges to each character per turn
+### Add a fixed number of dodges to each character per turn
 
 Simply give each character a single free dodge per turn.
 This idea was partially inspired by FTL's "shield" system.
@@ -33,7 +51,7 @@ This makes the RNG less extreme, as the player does not have to worry about
 getting hit until the shields are down - there's little potential for
 "oneshot"-ing.
 
-## Fatigue as "Shield"
+### Fatigue as "Shield"
 
 Instead of checking whether an attack hits or misses against a dice roll, each
 attack type has a fatigue cost that is automatically paid to dodge the attack.
@@ -66,7 +84,7 @@ for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
    "recover" (which all brothers will be given by default) to regenerate some
    fatigue as a defensive action.
 
-### Matk, Mdef, Ratk, Rdef Grant Skill Points To Fuel Skills
+#### Matk, Mdef, Ratk, Rdef Grant Skill Points To Fuel Skills
 
    Since hit change is always 100% or 0%, these stats no longer have any meaning.
    To make them relevant, so that decisions when leveling brothers are more
@@ -93,26 +111,26 @@ for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
    Since there are not too many defensive skills, Mdef and Rdef could also affect
    the fatigue recovery of bros slightly (like the "iron lungs" trait does).
 
-### Skill Changes
+#### Skill Changes
 
    - **Recover**: No longer tied to a perk, and given to all brothers by default.
    - **Shieldwall**: Reduces the fatigue cost to dodge/block an attack.
 
-### Strategy Changes
+#### Strategy Changes
 
    With getting hit being an inevitability, building "ultra tank" brothers that are
    designed to dodge 95% of attacks would no longer be possible.
    It will be more important that ever to position brothers so that one single
    brother isn't exposed to too many attacks per turn.
 
-### AI and Enemy Changes
+#### AI and Enemy Changes
 
    Some enemy stats (notably fatigue) may have to be tweaked to make this proposed
    design playable.
 
    Ideally this mod would not require changing any of the AI logic in the game.
 
-## Poise
+### Poise
 
    This mod currently uses a new stat called **poise** to determine if the target
    of an attack will be hit or not.
@@ -132,7 +150,7 @@ for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
    All characters have recover, and recover regenerates back to 75% of starting
    poise as well as the fat regen.
 
-### Matk, Mdef, Ratk, Rdef
+#### Matk, Mdef, Ratk, Rdef
 
    Since hit change is always 100% or 0%, these stats now effect the damage done by
    weapons.
@@ -144,19 +162,19 @@ for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
    Any chance below this and damage will be reduced, any above it and damage will
    be increased.
 
-### Ranged attacks
+#### Ranged attacks
 
    Ranged attacks will only drain poise if the targeted character is in the direct
    line of fire (not covered by another bro or an obstacle).
 
-### Strategy Notes
+#### Strategy Notes
 
    In a 1v1 neither party will be able to hit the other if they both regenerate 2
    poise per turn.
 
    In a 1v2 the lone party will be hit twice.
 
-### Perk/Skill Changes
+#### Perk/Skill Changes
 
    **NOT YET IMPLEMENTED!**
 
@@ -172,13 +190,13 @@ for dodging, or (2) focus on heavy armor and plan to just tank more hits, or (3)
    The benefit from light armor is more starting poise stacks.
 
 
-## Action Point Buffer
+### Action Point Buffer
 
 If a character is hit when they have action points remaining, the attack misses
 and they lose AP equal to the AP cost of the attacking skill, as well as some
 FAT.
 
-## Fast Adaptation Everywhere
+### Fast Adaptation Everywhere
 
 For every attacker-defender pair in the entire battle, track an "adaptation"
 count, which is initially set at (attackers matk - defenders mdef) // 20.
