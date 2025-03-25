@@ -37,7 +37,7 @@ mod and might still be nice to have.
 
 ## Installing the Mod
 
-Every commit to this repository will generate a GitHub release, from which you can download the mod_rng_free.zip file to place in your Battle Brothers data/ directory to install the mod.
+Every commit to this repository will generate a GitHub release (see right sidebar for a link to the most current one), from which you can download the `mod_rng_free.zip` file to place in your Battle Brothers data/ directory (e.g. `D:\SteamLibrary\steamapps\common\Battle Brothers\data`) to install the mod.
 
 ## Rejected Ideas
 
