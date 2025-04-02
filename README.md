@@ -50,7 +50,7 @@ mod and might still be nice to have.
 
 ## TODOs
 
- - [] Change riposte so that when activated the user gets a free dodge if hit
+ - [ ] Change riposte so that when activated the user gets a free dodge if hit
    before their next turn, which will trigger the riposte attack.
    Maybe increase action point cost to 9.
 
