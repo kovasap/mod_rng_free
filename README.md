@@ -58,6 +58,10 @@ mod and might still be nice to have.
 
 Every commit to this repository will generate a GitHub release (see right sidebar for a link to the most current one), from which you can download the `mod_rng_free.zip` file to place in your Battle Brothers data/ directory (e.g. `D:\SteamLibrary\steamapps\common\Battle Brothers\data`) to install the mod.
 
+<details>
+
+<summary>Rejected Ideas</summary>
+
 ## Rejected Ideas
 
 ### Add a fixed number of dodges to each character per turn
@@ -239,3 +243,4 @@ Some thoughts about how this would change the game:
 When shieldwalling, the character gets +2 to all "adaptation" counters to let them hold on a bit longer.  This goes up to the original max to prevent spam.
 
 
+</details>
