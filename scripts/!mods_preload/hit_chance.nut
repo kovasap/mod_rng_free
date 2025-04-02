@@ -118,7 +118,7 @@
 
 		if (!_targetEntity.isAbleToDie() && _targetEntity.getHitpoints() == 1)
 		{
-			toHit = 0;
+			toHit = -1;
 		}
 
 		if (!this.isUsingHitchance())
@@ -126,21 +126,7 @@
 			toHit = 100;
 		}
 
-		local r = this.Math.rand(1, 100);
-
-		if (("Assets" in this.World) && this.World.Assets != null && this.World.Assets.getCombatDifficulty() == 0)
-		{
-			if (_user.isPlayerControlled())
-			{
-				r = this.Math.max(1, r - 5);
-			}
-			else if (_targetEntity.isPlayerControlled())
-			{
-				r = this.Math.min(100, r + 5);
-			}
-		}
-
-		r = 0;  // Override randomness so hit chance is always 100%
+		local r = 0;  // Override randomness so hit chance is always 100%
 
 		local isHit = r <= toHit;
 
@@ -243,34 +229,8 @@
 			local distanceToTarget = _user.getTile().getDistanceTo(_targetEntity.getTile());
 			_targetEntity.onMissed(_user, this, this.m.IsShieldRelevant && shield != null && r <= toHit + shieldBonus * 2);
 			this.m.Container.onTargetMissed(this, _targetEntity);
-			local prohibitDiversion = false;
 
-			if (_allowDiversion && this.m.IsRanged && !_user.isPlayerControlled() && this.Math.rand(1, 100) <= 25 && distanceToTarget > 2)
-			{
-				local targetTile = _targetEntity.getTile();
-
-				for( local i = 0; i < this.Const.Direction.COUNT; i = ++i )
-				{
-					if (!targetTile.hasNextTile(i))
-					{
-					}
-					else
-					{
-						local tile = targetTile.getNextTile(i);
-
-						if (tile.IsEmpty)
-						{
-						}
-						else if (tile.IsOccupiedByActor && tile.getEntity().isAlliedWith(_user))
-						{
-							prohibitDiversion = true;
-							break;
-						}
-					}
-				}
-			}
-
-			if (_allowDiversion && this.m.IsRanged && !(this.m.IsShieldRelevant && shield != null && r <= toHit + shieldBonus * 2) && !prohibitDiversion && distanceToTarget > 2)
+			if (_allowDiversion && this.m.IsRanged && !(this.m.IsShieldRelevant && shield != null && r <= toHit + shieldBonus * 2) && distanceToTarget > 2)
 			{
 				this.divertAttack(_user, _targetEntity);
 			}

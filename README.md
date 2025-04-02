@@ -8,17 +8,27 @@ Battle brothers is a game that heavily relies on RNG in combat.
 I'm not sure what the developers had in mind exactly when they choose to design the game this way,
 but from my time playing I see the following effects:
 
- 1. Combat can be very tense when you have a brother in a bad position and a single hit could kill him.
+ 1. Combat can be very tense when you have a brother in a bad position and a
+    single hit could kill him.
     Every dice roll feels very exciting in this situation.
- 2. The game sometimes rewards the player when they make bad decisions, and sometimes punishes the player when they play perfectly.
-     - This, in addition to the opacity of the game mechanics in general, artificially extends ("pads") the amount of time it takes to master the game.
-       In other words, the game gives a pretty noisy feedback signal to the player.  This can be seen as a pro or a con.
- 3. Perks/builds that increase effective HP (e.g. colossus) are extremely important to buffer against the worst case scenario.
+ 2. The game sometimes rewards the player when they make bad decisions, and
+    sometimes punishes the player when they play perfectly.
+     - This, in addition to the opacity of the game mechanics in general,
+       artificially extends ("pads") the amount of time it takes to master the
+       game.
+       In other words, the game gives a pretty noisy feedback signal to the
+       player.
+       This can be seen as a pro or a con.
+ 3. Perks/builds that increase effective HP (e.g. colossus) are extremely
+    important to buffer against the worst case scenario.
  4. Matk/Mdef are extremely valuable stats.
- 5. Early game can feel particularly random, and you can expect to lose many bros early on regardless of your skill level.
+ 5. Early game can feel particularly random, and you can expect to lose many
+    bros early on regardless of your skill level.
 
-In reflecting on these points, I started wondering how the game would feel if combat was more deterministic.
-Would it start feeling boring?  Or would it instead simply feel less frustrating?
+In reflecting on these points, I started wondering how the game would feel if
+combat was more deterministic.
+Would it start feeling boring?
+Or would it instead simply feel less frustrating?
 This mod is the experiment I'm using to find out.
 
 ## Changes
@@ -31,9 +41,18 @@ that always hits, but for 5% damage.
 This idea behind this is that the expected hits to kill is the same as vanilla,
 but now it will always take the the same number of hits to kill no matter what.
 
+Ranged attacks will now always divert to another character if they are blocking
+the target.
+
 This mod also adds an "action points remaining" tooltip to all enemies.
 I should probably remove this, but it was useful for previous iterations of the
 mod and might still be nice to have.
+
+## TODOs
+
+ - [] Change riposte so that when activated the user gets a free dodge if hit
+   before their next turn, which will trigger the riposte attack.
+   Maybe increase action point cost to 9.
 
 ## Installing the Mod
 
