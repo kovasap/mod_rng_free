@@ -55,6 +55,31 @@ mod and might still be nice to have.
    Maybe increase action point cost to 9.
  - [ ] Consider making spearwall only work for the first 3 triggers.
 
+## Potential Not-yet-tried Alternatives
+
+### Tiered Hit Chance
+
+Create 4 tiers of damage that are deterministically selected from when a unit
+attacks:
+
+1. Miss if the hit chance was <30%
+2. Hit with 30% damage if hit chance was between 30% and 60%
+3. Hit with 100% damage if hit chance was between 60% and 90%
+4. Hit with 120% damage if hit chance was >90%
+
+### Pre-roll Hit Chance Modifiers
+
+At the start of every turn, roll a random hit chance modifier for every unit on
+the battlefield.
+This is then used to deterministicly calculate the chance of the attacks of all
+units for that turn (even if they make multiple attacks).
+
+The idea here is to have more "input randomness" and let the player make more
+educated moves for the turn.
+For instance, if a character got a bad roll for a turn, then the best move would
+be to hunker down or retreat.
+Or if a character got a good roll, they should attack as much as they can.
+
 ## Installing the Mod
 
 Every commit to this repository will generate a GitHub release (see right sidebar for a link to the most current one), from which you can download the `mod_rng_free.zip` file to place in your Battle Brothers data/ directory (e.g. `D:\SteamLibrary\steamapps\common\Battle Brothers\data`) to install the mod.
